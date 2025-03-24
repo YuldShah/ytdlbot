@@ -3,6 +3,8 @@
 import logging
 import math
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 from contextlib import contextmanager
 from typing import Literal
 

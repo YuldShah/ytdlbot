@@ -20,7 +20,7 @@ import filetype
 from pyrogram import enums, types
 from tqdm import tqdm
 
-from config import TG_NORMAL_MAX_SIZE, Types
+from config import TG_NORMAL_MAX_SIZE, Types, TMPFILE_PATH
 from database import Redis
 from database.model import (
     check_quota,
@@ -60,7 +60,7 @@ class BaseDownloader(ABC):
             # if in group, we need to find out who send the message
             self._from_user = bot_msg.reply_to_message.from_user.id
         self._id = bot_msg.id
-        self._tempdir = tempfile.TemporaryDirectory(prefix="ytdl-")
+        self._tempdir = tempfile.TemporaryDirectory(dir=TMPFILE_PATH, prefix="ytdl-")
         self._bot_msg: Types.Message = bot_msg
         self._redis = Redis()
         self._quality = get_quality_settings(self._chat_id)
